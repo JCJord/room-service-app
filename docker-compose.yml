@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  angular-app:
+    build: .
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules  # Avoid host-node_modules conflict
+    networks:
+      - angular-network
+    command: npm run start -- --host 0.0.0.0 --poll=2000
+
+networks:
+  angular-network:
+    driver: bridge
